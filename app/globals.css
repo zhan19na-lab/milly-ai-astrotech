@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════
+   BASE LAYER — cosmic dark foundation
+   ═══════════════════════════════════════════════════════════════ */
+@layer base {
+  :root {
+    --space-black:  #0D0D11;
+    --deep-indigo:  #151522;
+    --neon-purple:  #8B5CF6;
+    --neon-cyan:    #06B6D4;
+    --vivid-violet: #6D28D9;
+    --text-primary: rgba(255, 255, 255, 0.92);
+    --text-muted:   rgba(255, 255, 255, 0.45);
+  }
+
+  html {
+    /* Prevent iOS Safari elastic bounce revealing white background */
+    background-color: #0D0D11;
+    /* Smooth font rendering on dark backgrounds */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Prevent text size inflation on mobile orientation change */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: #0D0D11;
+    color: var(--text-primary);
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+    /* Nebula ambient layer — subtle top glow */
+    background-image: radial-gradient(
+      ellipse 80% 50% at 50% -10%,
+      rgba(109, 40, 217, 0.14) 0%,
+      transparent 65%
+    );
+    background-attachment: fixed;
+    min-height: 100dvh;
+  }
+
+  /* ── Cyberpunk scrollbar (Webkit) ──────────────────────────── */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0D0D11;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #8B5CF6 0%, #06B6D4 100%);
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #8B5CF6;
+    box-shadow: 0 0 6px rgba(139, 92, 246, 0.6);
+  }
+
+  /* Firefox thin scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #8B5CF6 #0D0D11;
+  }
+
+  /* Remove default focus outline; restore accessible custom ring */
+  *:focus-visible {
+    outline: 2px solid #8B5CF6;
+    outline-offset: 2px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COMPONENT LAYER — reusable Milly design tokens
+   ═══════════════════════════════════════════════════════════════ */
+@layer components {
+  /* Glassmorphism card — the core surface of the UI */
+  .glass-card {
+    background: rgba(21, 21, 34, 0.70);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(139, 92, 246, 0.15);
+  }
+
+  /* Stronger glow variant for featured / active cards */
+  .glass-card-glow {
+    background: rgba(21, 21, 34, 0.70);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(139, 92, 246, 0.20);
+    border-radius: 16px;
+    box-shadow:
+      0 8px 32px 0 rgba(139, 92, 246, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  }
+
+  /* Neon text gradient — purple → cyan */
+  .text-neon {
+    background: linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Neon button baseline */
+  .btn-neon {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-2.5
+           rounded-xl font-semibold text-sm tracking-wide
+           bg-neon-purple text-white
+           transition-all duration-200 ease-out
+           hover:shadow-neon-glow hover:brightness-110
+           active:scale-95;
+  }
+
+  /* Muted ghost button */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-2.5
+           rounded-xl font-semibold text-sm tracking-wide
+           border border-white/10 text-white/70
+           hover:border-neon-purple/40 hover:text-white
+           transition-all duration-200 ease-out
+           active:scale-95;
+  }
+}
